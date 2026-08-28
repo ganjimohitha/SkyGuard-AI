@@ -521,3 +521,727 @@ body {
     height: 420px;
   }
 }
+/* =========================================================
+   SHARED PAGE SHELL (Stations / Anomalies / Analytics /
+   Sensor Health / Settings)
+
+   Overview keeps its original fixed, non-scrolling `.dashboard`
+   layout above. These pages reuse the same design tokens
+   (colors, cards, panels) but live in a normal scrolling
+   container since their content (tables, forms, charts) can
+   exceed one screen.
+   ========================================================= */
+
+.page {
+  width: 100%;
+  height: 100vh;
+
+  padding: 28px 38px 40px;
+
+  overflow-y: auto;
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  margin: 0;
+
+  color: #0f172a;
+
+  font-size: 32px;
+  line-height: 1.15;
+
+  font-weight: 750;
+}
+
+.page-header p {
+  margin: 8px 0 0;
+
+  color: #64748b;
+
+  font-size: 15px;
+}
+
+/* =========================================================
+   TOOLBAR (search / filters)
+   ========================================================= */
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin-bottom: 18px;
+}
+
+.search-box {
+  position: relative;
+
+  flex: 1 1 260px;
+  min-width: 220px;
+}
+
+.search-box svg {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  color: #94a3b8;
+}
+
+.search-box input {
+  width: 100%;
+
+  padding: 10px 14px 10px 38px;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+
+  font-size: 13px;
+  color: #0f172a;
+
+  background: #ffffff;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.filter-select {
+  padding: 10px 14px;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+
+  background: #ffffff;
+
+  cursor: pointer;
+}
+
+.filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
+
+.filter-pill {
+  padding: 9px 18px;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+
+  background: #ffffff;
+  color: #64748b;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.filter-pill.active {
+  background: #2563eb;
+  border-color: #2563eb;
+
+  color: #ffffff;
+}
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.table-panel {
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+
+  overflow: hidden;
+}
+
+.table-scroll {
+  width: 100%;
+
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  min-width: 760px;
+
+  border-collapse: collapse;
+
+  font-size: 13px;
+}
+
+.data-table th {
+  padding: 14px 20px;
+
+  text-align: left;
+
+  color: #64748b;
+
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+
+  white-space: nowrap;
+
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.data-table td {
+  padding: 14px 20px;
+
+  color: #0f172a;
+
+  white-space: nowrap;
+
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.data-table tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table tbody tr:hover td {
+  background: #f8fafc;
+}
+
+.cell-muted {
+  color: #64748b;
+}
+
+.cell-strong {
+  font-weight: 700;
+}
+
+/* =========================================================
+   BADGES
+   ========================================================= */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 5px 12px;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: currentColor;
+}
+
+.badge.healthy {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.badge.warning {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.badge.critical {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.badge.resolved {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.empty-state {
+  padding: 70px 24px;
+
+  text-align: center;
+
+  color: #64748b;
+}
+
+.empty-state .empty-icon {
+  margin-bottom: 12px;
+
+  font-size: 32px;
+}
+
+.empty-state h3 {
+  margin: 0;
+
+  color: #0f172a;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.empty-state p {
+  margin: 6px 0 0;
+
+  font-size: 13px;
+}
+
+/* =========================================================
+   ANOMALY DETAIL CARDS (Anomalies page)
+   ========================================================= */
+
+.anomaly-detail-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+.anomaly-detail-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  gap: 20px;
+
+  padding: 18px 22px;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #f59e0b;
+  border-radius: 12px;
+}
+
+.anomaly-detail-card.critical {
+  border-left-color: #ef4444;
+}
+
+.anomaly-detail-card.warning {
+  border-left-color: #f59e0b;
+}
+
+.anomaly-detail-card.resolved {
+  border-left-color: #94a3b8;
+
+  opacity: 0.85;
+}
+
+.anomaly-detail-main {
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+
+  min-width: 240px;
+}
+
+.anomaly-detail-head {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.anomaly-detail-head strong {
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.anomaly-detail-station {
+  font-size: 12px;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.anomaly-detail-values {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 24px;
+
+  font-size: 12px;
+  color: #64748b;
+}
+
+.anomaly-detail-values strong {
+  display: block;
+
+  margin-top: 2px;
+
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.anomaly-detail-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  gap: 8px;
+
+  flex-shrink: 0;
+}
+
+.anomaly-confidence {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.anomaly-time {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+/* =========================================================
+   ANALYTICS CHARTS
+   ========================================================= */
+
+.range-toggle {
+  display: flex;
+
+  gap: 4px;
+
+  padding: 4px;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+}
+
+.range-toggle button {
+  padding: 8px 16px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: transparent;
+  color: #64748b;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.range-toggle button.active {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.charts-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 24px;
+}
+
+.chart-panel h2 {
+  margin: 0;
+
+  color: #0f172a;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.chart-panel p {
+  margin: 5px 0 16px;
+
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+.chart-panel.wide {
+  grid-column: 1 / -1;
+}
+
+/* =========================================================
+   SENSOR HEALTH
+   ========================================================= */
+
+.health-bar-track {
+  width: 100%;
+  height: 8px;
+
+  border-radius: 999px;
+
+  background: #e2e8f0;
+
+  overflow: hidden;
+}
+
+.health-bar-fill {
+  height: 100%;
+
+  border-radius: 999px;
+}
+
+.health-score-cell {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+
+  min-width: 120px;
+}
+
+.health-score-cell .health-score-value {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* =========================================================
+   SETTINGS
+   ========================================================= */
+
+.settings-grid {
+  display: flex;
+  flex-direction: column;
+
+  gap: 24px;
+
+  max-width: 860px;
+}
+
+.settings-section {
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+
+  padding: 24px 26px;
+}
+
+.settings-section h2 {
+  margin: 0 0 4px;
+
+  color: #0f172a;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.settings-section-desc {
+  margin: 0 0 18px;
+
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  gap: 16px;
+
+  padding: 14px 0;
+
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.settings-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.settings-row:first-child {
+  padding-top: 0;
+}
+
+.settings-row-label strong {
+  display: block;
+
+  color: #0f172a;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.settings-row-label span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+.settings-control select,
+.settings-control input[type="number"] {
+  min-width: 170px;
+
+  padding: 9px 12px;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+
+  font-size: 13px;
+  color: #0f172a;
+
+  background: #ffffff;
+}
+
+/* Toggle switch */
+
+.toggle {
+  position: relative;
+
+  display: inline-block;
+
+  width: 42px;
+  height: 24px;
+
+  flex-shrink: 0;
+}
+
+.toggle input {
+  opacity: 0;
+
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  inset: 0;
+
+  background: #e2e8f0;
+
+  border-radius: 999px;
+
+  cursor: pointer;
+
+  transition: background 0.15s ease;
+}
+
+.toggle-slider::before {
+  content: "";
+
+  position: absolute;
+  left: 3px;
+  top: 3px;
+
+  width: 18px;
+  height: 18px;
+
+  background: #ffffff;
+
+  border-radius: 50%;
+
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.25);
+
+  transition: transform 0.15s ease;
+}
+
+.toggle input:checked + .toggle-slider {
+  background: #2563eb;
+}
+
+.toggle input:checked + .toggle-slider::before {
+  transform: translateX(18px);
+}
+
+.system-info-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+.system-info-item {
+  padding: 14px 16px;
+
+  background: #f8fafc;
+
+  border-radius: 10px;
+}
+
+.system-info-item span {
+  display: block;
+
+  color: #64748b;
+
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.system-info-item strong {
+  display: block;
+
+  margin-top: 6px;
+
+  color: #0f172a;
+
+  font-size: 14px;
+}
+
+/* =========================================================
+   RESPONSIVE — SHARED PAGE SHELL
+   ========================================================= */
+
+@media (max-width: 1200px) {
+  .page {
+    padding: 24px;
+  }
+
+  .charts-grid {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 900px) {
+  .page {
+    height: auto;
+    overflow-y: visible;
+  }
+
+  .charts-grid,
+  .system-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-header h1 {
+    font-size: 26px;
+  }
+}
