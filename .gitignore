@@ -31,3 +31,11 @@ Thumbs.db
 *.db
 *.sqlite
 *.sqlite3
+
+# Large datasets
+backend/data/raw/
+backend/data/processed/
+
+# Generated dataset analysis
+backend/data/antaws_station_summary.csv
+backend/data/antaws_station_profile.csv
