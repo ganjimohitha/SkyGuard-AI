@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 
 from app.api.routes.detect import router as detect_router
-
+from app.api.routes.stations import router as stations_router
+from app.api.routes.observations import router as observations_router
 
 app = FastAPI(
     title="SkyGuard AI",
@@ -14,7 +15,14 @@ app.include_router(
     detect_router,
     prefix="/api/v1",
 )
-
+app.include_router(
+    stations_router,
+    prefix="/api/v1",
+)
+app.include_router(
+    observations_router,
+    prefix="/api/v1",
+)
 
 @app.get("/")
 def root():
